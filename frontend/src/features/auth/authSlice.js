@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
+import { createUser, checkUser } from "./authAPI";
 const initialState = {
   userInfo: null,
+  error: null,
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -9,10 +10,10 @@ export const createUserAsync = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await createUser(userData);
-
-      return response;
+      console.log("response", response);
+      return response.data;
     } catch (error) {
-      console.error("Error during login:", error);
+      console.error("Error during signup:", error);
       if (error.response && error.response.data) {
         return thunkAPI.rejectWithValue(error.response.data.err);
       } else {
@@ -27,7 +28,7 @@ export const loginUserAsync = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await checkUser(userData);
-
+      console.log("response", response);
       return response;
     } catch (error) {
       console.error("Error during login:", error);
@@ -53,8 +54,7 @@ export const userSlice = createSlice({
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.access_token = action.payload.access_token;
-        state.cartId = action.payload.cartId;
+        state.userInfo = action.payload;
       })
       .addCase(createUserAsync.rejected, (state, action) => {
         state.status = "idle";
@@ -65,7 +65,7 @@ export const userSlice = createSlice({
       })
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.access_token = action.payload.token;
+        state.userInfo = action.payload;
       })
       .addCase(loginUserAsync.rejected, (state, action) => {
         state.status = "idle";
@@ -76,6 +76,7 @@ export const userSlice = createSlice({
 
 export const {} = userSlice.actions;
 
-export const selectUser = (state) => state.user;
+export const selectUser = (state) => state.user.userInfo;
+export const selectError = (state) => state.user.error;
 
 export default userSlice.reducer;

@@ -19,7 +19,7 @@ export const checkUser = async (data) => {
       "http://localhost:3000/api/v1/auth/login",
       data
     );
-    return response.data.data;
+    return response.data;
   } catch (error) {
     console.log("Error in login of user", error);
     throw error;

@@ -27,6 +27,7 @@ class UserService {
 
       return user;
     } catch (error) {
+      console.log(error);
       console.log("something went wrong in service layer for sign in process");
       throw error;
     }

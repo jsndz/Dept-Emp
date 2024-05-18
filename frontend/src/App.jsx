@@ -6,6 +6,9 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
+import SIgnupPage from "./pages/SIgnupPage";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <SignupPage></SignupPage>,
+    element: <SIgnupPage></SIgnupPage>,
   },
 ]);
 
