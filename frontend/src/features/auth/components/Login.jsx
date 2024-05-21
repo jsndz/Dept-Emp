@@ -13,18 +13,14 @@ function Login() {
   return (
     <>
       {userInfo && <Navigate to="/" />}
-      <section className="min-h-screen flex items-center justify-center text-white  ">
-        <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0 ">
-          <div className="border-r-2 border-gray-600 pr-8">
-            {" "}
-            <h1>Database</h1>
-          </div>
-
-          <div className="w-full py-6 z-20">
+      <section className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+            <h1 className="text-3xl font-bold mb-6 text-Black-600">Database</h1>
             <form
               noValidate
               action="true"
-              className="sm:w-2/3 w-full px-4 lg:px-0 mx-auto"
+              className="w-full"
               onSubmit={handleSubmit((data) => {
                 dispatch(
                   loginUserAsync({
@@ -34,24 +30,24 @@ function Login() {
                 );
               })}
             >
-              <div className="pb-2 pt-4">
+              <div className="pb-4">
                 <input
                   type="email"
                   {...register("email", {
                     required: "Email is Required",
                     pattern: {
-                      value: /\b^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$\b/gi,
+                      value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
                       message: "Invalid Email",
                     },
                   })}
                   id="email"
                   placeholder="Email"
-                  className="block w-full p-4 text-lg rounded-sm bg-black"
+                  className="block w-full p-4 text-lg rounded-sm border border-gray-300"
                 />
               </div>
-              <div className="pb-2 pt-4">
+              <div className="pb-4">
                 <input
-                  className="block w-full p-4 text-lg rounded-sm bg-black"
+                  className="block w-full p-4 text-lg rounded-sm border border-gray-300"
                   type="password"
                   {...register("password", {
                     required: "Password is Required",
@@ -60,20 +56,21 @@ function Login() {
                   placeholder="Password"
                 />
               </div>
-              <p className="text-red-500 ">{error}</p>
-              <Link to="/reset-password">
-                <div className="text-right text-gray-400 hover:underline hover:text-gray-100">
-                  <button>Forgot your password?</button>
-                </div>
+              {error && <p className="text-red-500 pb-4">{error}</p>}
+              <Link
+                to="/reset-password"
+                className="text-right block text-gray-400 hover:underline hover:text-gray-600 mb-4"
+              >
+                Forgot your password?
               </Link>
-              <div className="px-4 pb-2 pt-4">
+              <div className="pb-4">
                 <button
                   type="submit"
-                  className="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 focus:outline-none"
+                  className="uppercase block w-full p-4 text-lg rounded-full bg-indigo-500 hover:bg-indigo-600 text-white focus:outline-none"
                 >
-                  sign in
+                  Sign in
                 </button>
-              </div>{" "}
+              </div>
               <div className="text-gray-600">
                 <p className="inline">Not a member?</p>
                 <span className="inline-block ml-2">

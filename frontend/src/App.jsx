@@ -9,7 +9,8 @@ import {
 import Home from "./pages/Home";
 import LoginPage from "./pages/LoginPage";
 import SIgnupPage from "./pages/SIgnupPage";
-
+import "./index.css";
+import DepartmentPage from "./features/department/DepartmentPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SIgnupPage></SIgnupPage>,
+  },
+  {
+    path: "/department",
+    element: <DepartmentPage></DepartmentPage>,
   },
 ]);
 

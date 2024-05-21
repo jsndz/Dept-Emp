@@ -11,7 +11,8 @@ Generate a new model:
 
 sh
 Copy code
-npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+npx sequelize-cli model:generate --name Department --attributes DID:string,Name:string
+npx sequelize-cli model:generate --name Department --attributes EID:string,Name:string,Salary:int,DID:string
 This creates a new model file in the models folder and a new migration file in the migrations folder.
 
 Run migrations:
