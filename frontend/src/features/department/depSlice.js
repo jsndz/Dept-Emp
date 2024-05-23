@@ -15,7 +15,7 @@ export const createDepartmentAsync = createAsyncThunk(
   async (departmentName, thunkAPI) => {
     try {
       const response = await createDepartment(departmentName);
-      console.log("response", response);
+
       return response.data;
     } catch (error) {
       console.error("Error during creating department:", error);
@@ -28,7 +28,6 @@ export const getDepartmentsAsync = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await getDepartments();
-      console.log("response", response);
       return response.data;
     } catch (error) {
       console.error("Error during getting department:", error);
@@ -39,9 +38,7 @@ export const deleteDepartmentsAsync = createAsyncThunk(
   "department/deleteDepartments",
   async (id, thunkAPI) => {
     try {
-      console.log("jjd");
       const response = await deleteDepartments(id);
-      console.log("response", response);
       return response.data;
     } catch (error) {
       console.error("Error during delete department:", error);
@@ -53,7 +50,7 @@ export const updateDepartmentsAsync = createAsyncThunk(
   async ({ id, data }, thunkAPI) => {
     try {
       const response = await updateDepartments(id, data);
-      console.log("response", response);
+
       return response.data;
     } catch (error) {
       console.error("Error during update department:", error);

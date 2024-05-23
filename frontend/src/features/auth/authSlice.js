@@ -9,8 +9,9 @@ export const createUserAsync = createAsyncThunk(
   "user/createUser",
   async (userData, thunkAPI) => {
     try {
+      console.log("hi");
       const response = await createUser(userData);
-      console.log("response", response);
+      console.log(response);
       return response.data;
     } catch (error) {
       console.error("Error during signup:", error);
@@ -28,7 +29,6 @@ export const loginUserAsync = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const response = await checkUser(userData);
-      console.log("response", response);
       return response;
     } catch (error) {
       console.error("Error during login:", error);
@@ -54,11 +54,9 @@ export const userSlice = createSlice({
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.userInfo = action.payload;
       })
       .addCase(createUserAsync.rejected, (state, action) => {
         state.status = "idle";
-        state.error = action.payload;
       })
       .addCase(loginUserAsync.pending, (state) => {
         state.status = "loading";

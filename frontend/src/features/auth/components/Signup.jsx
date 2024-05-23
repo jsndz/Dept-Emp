@@ -1,6 +1,5 @@
 import React from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { createUserAsync, selectError } from "../authSlice";
@@ -11,9 +10,23 @@ function Signup() {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm();
   const dispatch = useDispatch();
   const error = useSelector(selectError);
+
+  const onSubmit = async (data) => {
+    const result = await dispatch(
+      createUserAsync({
+        email: data.email,
+        password: data.password,
+      })
+    );
+
+    if (createUserAsync.fulfilled.match(result)) {
+      navigate("/login"); // navigate to login or another page on success
+    }
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
@@ -23,17 +36,7 @@ function Signup() {
             <h1 className="text-3xl font-bold text-gray-800">Database</h1>
           </div>
         </div>
-        <form
-          noValidate
-          onSubmit={handleSubmit(async (data) => {
-            await dispatch(
-              createUserAsync({
-                email: data.email,
-                password: data.password,
-              })
-            );
-          })}
-        >
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
           {/* Email input */}
           <div className="pb-4">
             <input
@@ -53,7 +56,6 @@ function Signup() {
               <p className="text-red-500">{errors.email.message}</p>
             )}
           </div>
-
           {/* Password input */}
           <div className="pb-4">
             <input
@@ -82,7 +84,7 @@ function Signup() {
               {...register("confirmPassword", {
                 required: "Confirm Password is Required",
                 validate: (value) =>
-                  value === password || "Passwords do not match",
+                  value === getValues("password") || "Passwords do not match",
               })}
               id="confirmPassword"
               placeholder="Confirm Password"
@@ -92,6 +94,8 @@ function Signup() {
             )}
           </div>
 
+          {error && <p className="text-red-500">{error}</p>}
+
           <div className="pb-4">
             <button
               type="submit"
@@ -100,7 +104,6 @@ function Signup() {
               Sign Up
             </button>
           </div>
-          {error && <p className="text-red-500 mb-4">{error}</p>}
 
           <div className="text-gray-600">
             <p className="inline">Already a member?</p>

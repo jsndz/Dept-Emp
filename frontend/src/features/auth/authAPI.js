@@ -2,10 +2,12 @@ import axios from "axios";
 
 export const createUser = async (data) => {
   try {
+    console.log("hii");
     const response = await axios.post(
       "http://localhost:3000/api/v1/auth/signup",
       data
     );
+    console.log(response);
     return response.data;
   } catch (error) {
     console.log("Error in creating user", error);

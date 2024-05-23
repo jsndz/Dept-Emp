@@ -1,14 +1,14 @@
-const { Department } = require("../models/index");
+const { Employee } = require("../models/index");
 const CrudRepository = require("./crud-repository");
-class DepartmentRepository extends CrudRepository {
+class EmployeeRepository extends CrudRepository {
   constructor() {
-    super(Department);
+    super(Employee);
   }
-  async deleteDepartment(Id) {
+  async deleteEmployee(Id) {
     try {
-      const result = await Department.destroy({
+      const result = await Employee.destroy({
         where: {
-          DID: Id,
+          EID: Id,
         },
       });
       return result;
@@ -17,11 +17,11 @@ class DepartmentRepository extends CrudRepository {
       throw { error };
     }
   }
-  async updateDepartment(modelId, data) {
+  async updateEmployee(modelId, data) {
     try {
-      const result = await Department.update(data, {
+      const result = await Employee.update(data, {
         where: {
-          DID: modelId,
+          EID: modelId,
         },
       });
       return result;
@@ -30,11 +30,11 @@ class DepartmentRepository extends CrudRepository {
       throw { error };
     }
   }
-  async getDepartmentNameById(id) {
+  async getEmployees() {
     try {
-      const result = await Department.findByPk(id);
+      const result = await Employee.findAll();
 
-      return result.Name;
+      return result;
     } catch (error) {
       console.log("Something went wrong in the repo layer");
       throw { error };
@@ -42,4 +42,4 @@ class DepartmentRepository extends CrudRepository {
   }
 }
 
-module.exports = DepartmentRepository;
+module.exports = EmployeeRepository;

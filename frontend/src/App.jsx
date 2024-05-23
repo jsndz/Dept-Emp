@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage";
 import SIgnupPage from "./pages/SIgnupPage";
 import "./index.css";
 import DepartmentPage from "./features/department/DepartmentPage";
+import EmployeePage from "./features/employee/EmployeePage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/department",
     element: <DepartmentPage></DepartmentPage>,
+  },
+  {
+    path: "/employee",
+    element: <EmployeePage></EmployeePage>,
   },
 ]);
 

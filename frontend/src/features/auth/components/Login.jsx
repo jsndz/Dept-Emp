@@ -12,7 +12,7 @@ function Login() {
   const userInfo = useSelector(selectUser);
   return (
     <>
-      {userInfo && <Navigate to="/" />}
+      {userInfo && <Navigate to="/"></Navigate>}
       <section className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className="lg:w-1/2 w-full flex items-center justify-center text-center md:px-16 px-0 z-0">
           <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">

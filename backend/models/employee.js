@@ -18,13 +18,16 @@ module.exports = (sequelize, DataTypes) => {
   Employee.init(
     {
       EID: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
       },
-      Name: DataTypes.STRING,
-      Salary: DataTypes.INTEGER,
+      Name: { type: DataTypes.STRING, allowNull: false },
+      Salary: { type: DataTypes.INTEGER, allowNull: false },
       DID: {
         type: DataTypes.INTEGER,
+        allowNull: true,
         references: {
           model: "Departments",
           key: "DID",

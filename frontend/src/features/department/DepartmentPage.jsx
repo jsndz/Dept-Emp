@@ -8,17 +8,19 @@ import {
   updateDepartmentsAsync,
   deleteDepartmentsAsync,
 } from "./depSlice";
+import { Link } from "react-router-dom";
 
 const DepartmentPage = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
   const [currentDepartment, setCurrentDepartment] = useState(null);
 
+  const departments = useSelector(selectDepartments);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getDepartmentsAsync());
-  }, []);
+  }, [dispatch]);
 
   const openDialog = () => {
     setIsDialogOpen(true);
@@ -39,7 +41,6 @@ const DepartmentPage = () => {
   };
 
   const { register, handleSubmit } = useForm();
-  const departments = useSelector(selectDepartments);
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
@@ -101,7 +102,13 @@ const DepartmentPage = () => {
             className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
           >
             ADD
-          </button>
+          </button>{" "}
+          <Link to="/employee">
+            {" "}
+            <button className="px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600">
+              Employee
+            </button>
+          </Link>
         </div>
       </div>
 

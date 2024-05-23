@@ -6,16 +6,20 @@ module.exports = {
       EID: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.STRING,
+        autoIncrement: true,
+        type: Sequelize.INTEGER,
       },
       Name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       Salary: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       DID: {
         type: Sequelize.INTEGER,
+        allowNull: true,
         references: {
           model: "Departments",
           key: "DID",

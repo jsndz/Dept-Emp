@@ -1,7 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import UserReducer from "../features/auth/authSlice";
-import DepartmentUser from "../features/department/depSlice";
+import DepartmentReducer from "../features/department/depSlice";
+import EmployeeReducer from "../features/employee/empSlice";
 const store = configureStore({
-  reducer: { user: UserReducer, department: DepartmentUser },
+  reducer: {
+    user: UserReducer,
+    department: DepartmentReducer,
+    employee: EmployeeReducer,
+  },
 });
 export default store;
